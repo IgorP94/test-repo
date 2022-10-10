@@ -1,0 +1,22 @@
+<div class="form-group">
+    <div ngbDropdown>
+        <button type="button"
+            id="role-button"
+            class="btn btn-default border-dark"
+            ngbDropdownToggle
+            >{{ selectedItem ? selectedItem: defaultDropDownOption }}
+        </button>
+        <div ngbDropdownMenu class="dropdown-menu-style">
+            <button type="button" ngbDropdownItem disabled>
+                {{ defaultDropDownOption }}
+            </button>
+            <button *ngFor="let dropdownItem of dropdownItems"
+            type="button"
+            ngbDropdownItem
+            (click)="dropdownItemSelected($event)"
+            [value]="dropdownItem">
+            {{ dropdownItem }}
+        </button>
+        </div>
+    </div>
+</div>

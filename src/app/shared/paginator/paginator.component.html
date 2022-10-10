@@ -1,0 +1,3 @@
+<button [disabled]="currentPage <= 1" type="button" (click)="sendPageValue(currentPage - 1)"><</button>
+{{ currentPage }}
+<button type="button" [disabled]="currentPage >= collectionSize / pageSize" (click)="sendPageValue(currentPage + 1)">></button>

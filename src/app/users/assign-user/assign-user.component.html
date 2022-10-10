@@ -1,0 +1,11 @@
+<div *ngIf="userModel">
+    <div>{{ userModel.firstName }} {{ userModel.lastName }} </div>
+    <div>Current role: {{ userModel.role }}</div>
+    <label>Change role:</label>
+    <app-dropdown
+        [defaultDropDownOption]="DEFAULT_DROPDOWN_OPTION"
+        [selectedItem]="userModel.role"
+        (dropdownSelection)="roleSelected($event)"
+        [dropdownItems]="roles"
+    ></app-dropdown>
+</div>
