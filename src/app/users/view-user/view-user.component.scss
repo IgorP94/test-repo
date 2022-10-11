@@ -13,26 +13,22 @@
     padding: 50px;
     font-family: Arial, Helvetica, sans-serif;
 
-    .title {
-        font-size: 36px;
-        margin-bottom: 50px;
+    .info-container {
+        font-size: 18px;
     }
 
-    .user-info {
-        font-size: 24px;
-        margin-bottom: 30px;
+    .permissions-title {
+        margin-top: 20px;
+        font-size: 18px;
     }
 
-    .buttons {
-        margin: 50px;
+    .permissions-container {
+        padding: 15px;
+        border: 1px solid #000;
+        background: #fff;
     }
 
     .bold {
         font-weight: bold;
-        margin: 0 5px 0 5px;
-    }
-    
-    .checkboxes {
-        margin-bottom: 10px;
     }
 }

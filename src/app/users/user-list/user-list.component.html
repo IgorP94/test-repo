@@ -1,59 +1,76 @@
-<div>Mistral Interview Task - Igor Pavlovic</div>
-<div>
+<div class="home-page">
+    <div class="home-title">Mistral Interview Task - Igor Pavlovic</div>
     <div>
-        <button [routerLink]="['/upsert-user']">Add new user</button>
-    </div>
-    <div>
-        <label>Order by: </label>
-        <app-dropdown
-            [defaultDropDownOption]="DEFAULT_DROPDOWN_TEXT_ORDER"
-            [selectedItem]="DEFAULT_DROPDOWN_TEXT_ORDER"
-            (dropdownSelection)="orderUsersBy($event)"
-            [dropdownItems]="userAttributes">
-        </app-dropdown>
-    </div>
-    <div>
-        <label>Filter value:</label>
-        <app-dropdown 
-            [defaultDropDownOption]="DEFAULT_DROPDOWN_FILTERING"
-            [selectedItem]="DEFAULT_DROPDOWN_FILTERING"
-            (dropdownSelection)="selectFilter($event)"
-            [dropdownItems]="userAttributes">
-        </app-dropdown>
-        <input type="text" #filterInput>
-        <button type="button" (click)="applyFilter()">Apply filter</button>
-        <button type="button" (click)="resetFilter()">Reset filter</button>
-
-    </div>
-    <table id="users-table">
-        <thead>
-            <tr>
-                <th *ngFor="let column of displayColumns"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.userName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.status }}</td>
-                <div ngbDropdown>
-                    <button id="actionsDropdownToggle" ngbDropdownToggle>Actions</button>
-                    <div ngbDropdownMenu>
-                        <button [routerLink]="['/upsert-user', user['id']]" ngbDropdownItem>Edit</button>
-                        <button [routerLink]="['/assign-user', user['id']]" ngbDropdownItem>Assign</button>
-                        <button type="button" (click)="deleteUser(user.id)" ngbDropdownItem>Delete</button>
+        <div class="top-container">
+            <div class="add-user-container">
+                <button class="btn btn-primary" [routerLink]="['/upsert-user']">Add new user</button>
+            </div>
+            <div class="d-flex">
+                <label class="vertical-align line-height">Order by: </label>
+                <app-dropdown [defaultDropDownOption]="DEFAULT_DROPDOWN_TEXT_ORDER"
+                    [selectedItem]="DEFAULT_DROPDOWN_TEXT_ORDER" (dropdownSelection)="orderUsersBy($event)"
+                    [dropdownItems]="userAttributes">
+                </app-dropdown>
+                <div class="d-flex pull-right">
+                    <label class="vertical-align line-height">Filter value:</label>
+                    <app-dropdown [defaultDropDownOption]="DEFAULT_DROPDOWN_FILTERING"
+                        [selectedItem]="DEFAULT_DROPDOWN_FILTERING" (dropdownSelection)="selectFilter($event)"
+                        [dropdownItems]="userAttributes">
+                    </app-dropdown>
+                    <input *ngIf="selectedFilter !== 'status'" type="text" class="margins"
+                        placeholder="Input filter value here..." #filterInput>
+                    <div *ngIf="selectedFilter === 'status'">
+                        <input type="checkbox" class="margins" (change)="toggleStatusFilter($event)">
                     </div>
+                    <button type="button" class="btn btn-info" (click)="applyFilter()">Apply filter</button>
                 </div>
-            </tr>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <app-paginator (inputPageEvent)="pageChanged($event)"
-            [pageSize]="PAGE_SIZE"
-            [page]="selectedPage"
-            [collectionSize]="totalUsers">
-        </app-paginator>
+            </div>
+            <div class="d-flex">
+                <button type="button" class="btn btn-success" style="margin-top: 5px;" (click)="resetFilter()">Reset
+                    filter</button>
+            </div>
+        </div>
+        <table id="users-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of displayColumns"> {{column}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <div *ngIf="user.status; else inactive">
+                            <button class="btn btn-success fixed-width" disabled>Active</button>
+                        </div>
+                        <ng-template #inactive>
+                            <button class="btn btn-danger fixed-width" disabled>Inactive</button>
+                        </ng-template>
+                    </td>
+                    <div ngbDropdown>
+                        <button class="btn btn-light" id="actionsDropdownToggle" ngbDropdownToggle>Actions</button>
+                        <div ngbDropdownMenu>
+                            <button class="btn btn-light" [routerLink]="['/upsert-user', user['id']]"
+                                ngbDropdownItem>Edit</button>
+                            <button class="btn btn-light" [routerLink]="['/assign-user', user['id']]"
+                                ngbDropdownItem>Assign</button>
+                            <button class="btn btn-light" [routerLink]="['/view-user', user['id']]"
+                                ngbDropdownItem>View</button>
+                            <button class="btn btn-light" type="button" (click)="openDeleteModal(user)"
+                                ngbDropdownItem>Delete</button>
+                        </div>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <div class="paginator">
+            <app-paginator (inputPageEvent)="pageChanged($event)" [pageSize]="PAGE_SIZE" [page]="selectedPage"
+                [collectionSize]="totalUsers">
+            </app-paginator>
+        </div>
     </div>
+    <app-delete-user-modal #deleteUserModal (confirmDeletion)="deleteUser($event)"></app-delete-user-modal>
 </div>

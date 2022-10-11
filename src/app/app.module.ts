@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpsertUserComponent } from './users/upsert-user/upsert-user.component';
 import { AssignUserComponent } from './users/assign-user/assign-user.component';
 import { DropdownComponent } from './shared/dropdown/dropdown.component';
+import { ViewUserComponent } from './users/view-user/view-user.component';
+import { DeleteUserModalComponent } from './users/delete-user-modal/delete-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DropdownComponent } from './shared/dropdown/dropdown.component';
     PaginatorComponent,
     UpsertUserComponent,
     AssignUserComponent,
-    DropdownComponent
+    DropdownComponent,
+    ViewUserComponent,
+    DeleteUserModalComponent
   ],
   imports: [
     BrowserModule,

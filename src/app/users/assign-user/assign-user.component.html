@@ -1,12 +1,16 @@
-<div *ngIf="userModel">
-    <div>{{ userModel.firstName }} {{ userModel.lastName }} </div>
-
-    <div>
-        <div *ngFor="let permission of permissions">
-            <input type="checkbox" [id]="'cb-' + permission.code" [checked]="userHasPermission(permission)" (change)="togglePermission($event, permission)"> {{ permission.code }}
+<div class="background">
+    <div class="title">Assign Permissions</div>
+    <div *ngIf="userModel">
+        <div class="user-info">{{ userModel.firstName }} {{ userModel.lastName }} </div>
+        <div class="buttons">
+            <div class="checkboxes" *ngFor="let permission of permissions">
+                <input class="form-check-input" type="checkbox" [id]="'cb-' + permission.code" [checked]="userHasPermission(permission)"
+                    (change)="togglePermission($event, permission)"> 
+                <label class="bold"> {{ permission.code }}: </label>  
+                <label> {{ permission.description }}</label>
+            </div>
+            <button class="btn btn-primary" style="margin-right: 5px;" (click)="saveChanges()">Save</button>
+            <button class="btn btn-danger" (click)="cancelChanges()">Cancel</button>
         </div>
     </div>
-
-    <button (click)="saveChanges()">Save</button>
-    <button (click)="cancelChanges()">Cancel</button>
 </div>

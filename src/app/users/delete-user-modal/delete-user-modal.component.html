@@ -1,0 +1,30 @@
+<div *ngIf="userModel" [ngClass]="this.hidden ? 'hidden' : 'showing'" class="modal-dialog-centered">
+    <div class="delete-modal">
+        <div class="modal-header">
+            <div class="modal-title">
+                <h3>Delete User</h3>
+            </div>
+        </div>
+        <div class="modal-body">
+            <label>Are you sure you wish to delete this user?</label>
+            <div class="user-info">
+                <div class="user-info-line">
+                    <label>Name: {{ userModel.firstName }}</label>
+                </div>
+                <div class="user-info-line">
+                    <label>Last Name: {{ userModel.lastName }}</label>
+                </div>
+                <div class="user-info-line">
+                    <label>Username: {{ userModel.userName }}</label>
+                </div>
+                <div class="user-info-line">
+                    <label>Email: {{ userModel.email }}</label>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-danger" style="margin-right: 5px;" (click)="confirmDelete()">Confirm</button>
+                <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

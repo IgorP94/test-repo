@@ -7,7 +7,7 @@ export class UserModel {
     userName: string;
     password: string;
     email: string;
-    status: string;
+    status: boolean;
     permissions: UserPermissions[];
 
     constructor(
@@ -17,7 +17,7 @@ export class UserModel {
         userName: string,
         password: string,
         email: string,
-        status: string,
+        status: boolean,
         permissions: UserPermissions[]
     ) {
         this.id = id;

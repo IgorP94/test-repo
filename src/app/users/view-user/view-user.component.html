@@ -1,0 +1,27 @@
+<div class="background">
+    <div *ngIf="userModel" class="user-info">
+        <div class="info-container">
+            <label>First Name: {{ userModel.firstName }}</label>
+        </div>
+        <div class="info-container">
+            <label>Last Name: {{ userModel.lastName }}</label>
+        </div>
+        <div class="info-container">
+            <label>Username: {{ userModel.userName }}</label>
+        </div>
+        <div class="info-container">
+            <label>E-Mail: {{ userModel.email }}</label>
+        </div>
+        <div class="info-container">
+            <label>Status: {{ userModel.status }}</label>
+        </div>
+    </div>
+    <label class="permissions-title">User's permissions:</label>
+    <div class="permissions-container">
+        <div *ngFor="let permission of userModel?.permissions">
+            <label class="bold"> {{ permission.code }}: </label>
+            <label> {{ permission.description }}</label>
+        </div>
+    </div>
+    <button class="btn btn-primary mt-5" (click)="goHome()">Back</button>
+</div>

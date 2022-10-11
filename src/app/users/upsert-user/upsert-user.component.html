@@ -1,32 +1,39 @@
-<div>{{ isEdit ? 'Edit' : 'Create' }} user</div>
-<form *ngIf="userModel && form" [formGroup]="form">
-    <div class="form-group" *ngIf="userModel.firstName !== null">
-        <label>Name</label>
-        <input class="form-control" id="firstName" type="text" formControlName="firstName" required/>
-    </div>
-    <div class="form-group" *ngIf="userModel.lastName !== null">
-        <label>Last Name</label>
-        <input formControlName="lastName" class="form-control" id="lastName" type="text" required/>
-    </div>
-    <div class="form-group" *ngIf="userModel.userName !== null">
-        <label>Username</label>
-        <input formControlName="userName" class="form-control" id="userName" type="text" required/>
-    </div>
-    <div class="form-group" *ngIf="userModel.password !== null">
-        <label>Password</label>
-        <input formControlName="password" class="form-control" id="password" type="password" required/>
-    </div>
-    <div class="form-group" *ngIf="userModel.email !== null">
-        <label>Email</label>
-        <input formControlName="email" class="form-control" id="email" type="email" required/>
-    </div>
-    <div class="form-group" *ngIf="userModel.status !== null">
-        <label>Status</label>
-        <div>
-            <input type="radio" formControlName="status" id="status-active" value="active" name="status"> Active
-            <input type="radio" formControlName="status" id="status-inactive" value="inactive" name="status"> Inactive
+<div class="background">
+    <div class="title">{{ isEdit ? 'Edit' : 'Create' }} User</div>
+    <form *ngIf="userModel && form" [formGroup]="form">
+        <div class="form-group" *ngIf="userModel.firstName !== null">
+            <label>Name</label>
+            <input class="form-control" id="firstName" type="text" formControlName="firstName" required />
         </div>
-    </div>
-    <button type="button" (click)="saveUser()">Save</button>
-    <button type="button" (click)="cancelChanges()">Cancel</button>
-</form>
+        <div class="form-group" *ngIf="userModel.lastName !== null">
+            <label>Last Name</label>
+            <input formControlName="lastName" class="form-control" id="lastName" type="text" required />
+        </div>
+        <div class="form-group" *ngIf="userModel.userName !== null">
+            <label>Username</label>
+            <input formControlName="userName" class="form-control" id="userName" type="text" required />
+        </div>
+        <div class="form-group" *ngIf="userModel.password !== null">
+            <label>Password</label>
+            <input formControlName="password" class="form-control" id="password" type="password" required />
+        </div>
+        <div class="form-group" *ngIf="userModel.email !== null">
+            <label>Email</label>
+            <input formControlName="email" class="form-control" id="email" type="email" required />
+        </div>
+        <div class="form-group" *ngIf="userModel.status !== null">
+            <label>Status</label>
+            <div>
+                <input type="radio" class="form-check-input" formControlName="status" id="status-active" value="active"
+                    name="status"> Active
+                <input type="radio" class="form-check-input" formControlName="status" id="status-inactive"
+                    value="inactive" name="status">
+                Inactive
+            </div>
+        </div>
+        <div class="mt-5">
+            <button type="button" class="btn btn-primary" style="margin-right: 5px;" (click)="saveUser()">Save</button>
+            <button type="button" class="btn btn-danger" (click)="cancelChanges()">Cancel</button>
+        </div>
+    </form>
+</div>
