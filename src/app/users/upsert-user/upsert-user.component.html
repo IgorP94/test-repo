@@ -1,26 +1,26 @@
 <div>{{ isEdit ? 'Edit' : 'Create' }} user</div>
 <form *ngIf="userModel && form" [formGroup]="form">
-    <div class="form-group" *ngIf="userModel.firstName != null">
+    <div class="form-group" *ngIf="userModel.firstName !== null">
         <label>Name</label>
         <input class="form-control" id="firstName" type="text" formControlName="firstName" required/>
     </div>
-    <div class="form-group" *ngIf="userModel.lastName != null">
+    <div class="form-group" *ngIf="userModel.lastName !== null">
         <label>Last Name</label>
         <input formControlName="lastName" class="form-control" id="lastName" type="text" required/>
     </div>
-    <div class="form-group" *ngIf="userModel.userName != null">
+    <div class="form-group" *ngIf="userModel.userName !== null">
         <label>Username</label>
         <input formControlName="userName" class="form-control" id="userName" type="text" required/>
     </div>
-    <div class="form-group" *ngIf="userModel.password != null">
+    <div class="form-group" *ngIf="userModel.password !== null">
         <label>Password</label>
         <input formControlName="password" class="form-control" id="password" type="password" required/>
     </div>
-    <div class="form-group" *ngIf="userModel.email != null">
+    <div class="form-group" *ngIf="userModel.email !== null">
         <label>Email</label>
         <input formControlName="email" class="form-control" id="email" type="email" required/>
     </div>
-    <div class="form-group" *ngIf="userModel.status != null">
+    <div class="form-group" *ngIf="userModel.status !== null">
         <label>Status</label>
         <div>
             <input type="radio" formControlName="status" id="status-active" value="active" name="status"> Active

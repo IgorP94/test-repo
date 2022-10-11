@@ -1,11 +1,12 @@
 <div *ngIf="userModel">
     <div>{{ userModel.firstName }} {{ userModel.lastName }} </div>
-    <div>Current role: {{ userModel.role }}</div>
-    <label>Change role:</label>
-    <app-dropdown
-        [defaultDropDownOption]="DEFAULT_DROPDOWN_OPTION"
-        [selectedItem]="userModel.role"
-        (dropdownSelection)="roleSelected($event)"
-        [dropdownItems]="roles"
-    ></app-dropdown>
+
+    <div>
+        <div *ngFor="let permission of permissions">
+            <input type="checkbox" [id]="'cb-' + permission.code" [checked]="userHasPermission(permission)" (change)="togglePermission($event, permission)"> {{ permission.code }}
+        </div>
+    </div>
+
+    <button (click)="saveChanges()">Save</button>
+    <button (click)="cancelChanges()">Cancel</button>
 </div>

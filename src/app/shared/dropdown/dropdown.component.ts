@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -11,7 +11,7 @@ export class DropdownComponent {
   @Input() selectedItem: string | undefined;
   @Input() defaultDropDownOption: string | undefined;
   @Input() disabled = false;
-  @Input() dropdownSelection = new EventEmitter<string>();
+  @Output() dropdownSelection = new EventEmitter<string>();
 
   dropdownItemSelected($event: any) {
     this.selectedItem = $event.target.value;

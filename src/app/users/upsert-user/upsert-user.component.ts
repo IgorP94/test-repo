@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user-model';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { UsersService } from 'src/app/services/users-service.service';
 
 @Component({
@@ -17,8 +18,8 @@ export class UpsertUserComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private userService: UsersService,
-    private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private navigationService: NavigationService) {
       this.userModel = userService.getEmptyUser();
     }
 
@@ -41,7 +42,7 @@ export class UpsertUserComponent implements OnInit {
       firstName: new FormControl(this.userModel?.firstName, [Validators.required]),
       lastName: new FormControl(this.userModel?.lastName, [Validators.required]),
       userName: new FormControl(this.userModel?.userName, [Validators.required]),
-      password: new FormControl(this.userModel?.password, [Validators.required]),
+      password: new FormControl({ value: this.userModel?.password, disabled: this.isEdit}),
       email: new FormControl(this.userModel?.email, [Validators.required]),
       status: new FormControl(this.userModel?.status, [Validators.required]),
     });
@@ -57,16 +58,12 @@ export class UpsertUserComponent implements OnInit {
         ...this.form.value
       }
       this.userService.addUser(newUserModel);
-      this.navigateBackHome();
+      this.navigationService.navigateBackHome();
     }
   }
 
   cancelChanges() {
-    this.navigateBackHome();
-  }
-
-  navigateBackHome() {
-    this.router.navigate(['/']);
+    this.navigationService.navigateBackHome();
   }
 
 }

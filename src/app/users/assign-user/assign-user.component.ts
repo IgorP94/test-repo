@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user-model';
-import { UserRole } from 'src/app/models/user-roles.enum';
+import { UserPermissions } from 'src/app/models/user-permissions';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { UsersService } from 'src/app/services/users-service.service';
 
 @Component({
@@ -10,23 +11,22 @@ import { UsersService } from 'src/app/services/users-service.service';
   styleUrls: ['./assign-user.component.scss']
 })
 export class AssignUserComponent implements OnInit {
-  DEFAULT_DROPDOWN_OPTION = "Select a Role"
-
   userModel: UserModel | undefined;
-  roles: Array<string> = Object.values(UserRole);
+  permissions: UserPermissions[] | undefined;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private userService: UsersService) { }
+    private userService: UsersService,
+    private navigationService: NavigationService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       const id = this.route.snapshot.paramMap.get('id');
       if (id == null) {
-        this.router.navigate(['/']);
+        this.navigationService.navigateBackHome();
         return;
       }
       this.setUserValues(+id);
+      this.permissions = this.userService.permissions;
     })
   }
 
@@ -34,8 +34,29 @@ export class AssignUserComponent implements OnInit {
     this.userModel = this.userService.getUserById(id);
   }
 
-  roleSelected($event: any) {
-    this.userModel!.role = $event;
+  saveChanges() {
+    if (this.userModel) {
+      this.userService.addUser(this.userModel);
+      this.navigationService.navigateBackHome();
+    }
+  }
+
+  cancelChanges() {
+    this.navigationService.navigateBackHome();
+  }
+
+  userHasPermission(permission: UserPermissions): Boolean {
+    return this.userModel?.permissions.find(x => permission.id == x.id) != null;
+  }
+
+  togglePermission($event: any, permission: UserPermissions) {
+    if (this.userModel) {
+      if ($event.target.checked) {
+        this.userModel.permissions.push(permission);
+      } else {
+        this.userModel.permissions = this.userModel.permissions.filter(x => x.id !== permission.id);
+      }
+    }
   }
 
 }

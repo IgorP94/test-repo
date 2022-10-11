@@ -1,4 +1,4 @@
-import { UserRole } from "./user-roles.enum";
+import { UserPermissions } from "./user-permissions";
 
 export class UserModel {
     id: number;
@@ -8,7 +8,7 @@ export class UserModel {
     password: string;
     email: string;
     status: string;
-    role: UserRole;
+    permissions: UserPermissions[];
 
     constructor(
         id: number,
@@ -18,8 +18,8 @@ export class UserModel {
         password: string,
         email: string,
         status: string,
-        role: UserRole
-        ) {
+        permissions: UserPermissions[]
+    ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,6 +27,6 @@ export class UserModel {
         this.password = password;
         this.email = email;
         this.status = status;
-        this.role = role;
+        this.permissions = permissions;
     }
 }
