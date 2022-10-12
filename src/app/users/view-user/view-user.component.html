@@ -13,7 +13,13 @@
             <label>E-Mail: {{ userModel.email }}</label>
         </div>
         <div class="info-container">
-            <label>Status: {{ userModel.status }}</label>
+            <label class="margins">Status: </label>
+            <div class="d-inline" *ngIf="userModel.status; else inactive">
+                <button class="btn btn-success fixed-width" disabled>Active</button>
+            </div>
+            <ng-template #inactive>
+                <button class="btn btn-danger fixed-width" disabled>Inactive</button>
+            </ng-template>
         </div>
     </div>
     <label class="permissions-title">User's permissions:</label>

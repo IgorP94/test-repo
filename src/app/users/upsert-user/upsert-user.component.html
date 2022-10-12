@@ -24,11 +24,8 @@
         <div class="form-group" *ngIf="userModel.status !== null">
             <label>Status</label>
             <div>
-                <input type="radio" class="form-check-input" formControlName="status" id="status-active" value="active"
-                    name="status"> Active
-                <input type="radio" class="form-check-input" formControlName="status" id="status-inactive"
-                    value="inactive" name="status">
-                Inactive
+                <input type="checkbox" class="form-check-input margins" formControlName="status" id="status-active">
+                <label for="status-active">Active</label>
             </div>
         </div>
         <div class="mt-5">
